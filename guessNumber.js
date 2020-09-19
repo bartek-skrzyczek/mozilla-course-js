@@ -12,8 +12,6 @@ let attempts = 1;
 
 function guessNumber() {
   let inputValue = Number(userGuess.value);
-
-
   guessesArray.push(" " + inputValue);
   guessesContainer.textContent = "Your previous guesses: "; 
   guessesContainer.textContent += guessesArray + ' ';
@@ -41,25 +39,30 @@ function guessNumber() {
         lastResult.innerHTML = 'Last guess was too high!';
         }
       }
-
-
     userGuess.value = "";
     userGuess.focus;
     attempts++;
-    console.log(numberToGuess);
   }
 
   function setGameOver() {
-    button.disabled = "true";
-    userGuess.disabled = "true";
+    button.disabled = true;
+    userGuess.disabled = true;
     resetButton = document.createElement("button");
     resetButton.textContent = "Start new game";
     document.body.appendChild(resetButton);
     resetButton.addEventListener("click", function(){
-      newGame();
+      newG();
     }) 
   }
 
+  function newG() {
+    button.disabled = false;
+    userGuess.disabled = false;
+    document.body.removeChild(resetButton);
+    lastResult.textContent = '';
+    guessesContainer.textContent = ""; 
+    guessesArray.splice(0, guessesArray.length);
+  }
 
   button.addEventListener("click", function() {
     guessNumber();
